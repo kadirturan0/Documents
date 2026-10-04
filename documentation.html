@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lina Theme - Official Documentation & Merchant Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-body: #f8fafc;
+      --bg-sidebar: #ffffff;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #0066cc;
+      --primary-hover: #0052a3;
+      --primary-light: #eff6ff;
+      --accent: #10b981;
+      --code-bg: #1e293b;
+      --code-text: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation */
+    aside.sidebar {
+      width: 300px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      padding: 2rem 1.25rem;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--primary), #3b82f6);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .brand-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .brand-version {
+      font-size: 0.75rem;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .doc-search {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .doc-search input {
+      width: 100%;
+      padding: 0.65rem 0.8rem 0.65rem 2.2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-size: 0.875rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .doc-search input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0,102,204,0.15);
+    }
+
+    .doc-search svg {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    nav.nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .nav-section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.45rem 0.75rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--primary);
+      background-color: var(--primary-light);
+      font-weight: 600;
+    }
+
+    .badge-count {
+      font-size: 0.7rem;
+      background: #e2e8f0;
+      color: #475569;
+      padding: 1px 6px;
+      border-radius: 10px;
+    }
+
+    /* Main Content */
+    main.main-content {
+      margin-left: 300px;
+      flex: 1;
+      padding: 3rem 4.5rem;
+      max-width: 1050px;
+    }
+
+    .doc-header {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .doc-header h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .doc-header p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+    }
+
+    section.doc-section {
+      margin-bottom: 4rem;
+      scroll-margin-top: 2rem;
+    }
+
+    section.doc-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    section.doc-section h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1.4rem;
+      background-color: var(--primary);
+      border-radius: 4px;
+    }
+
+    section.doc-section h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 2rem 0 0.85rem 0;
+      color: var(--text-main);
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #334155;
+      font-size: 0.975rem;
+    }
+
+    /* Feature Cards Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .info-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .info-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .info-card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .info-card h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius);
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .callout-info {
+      background-color: #eff6ff;
+      border-left: 4px solid var(--primary);
+      color: #1e40af;
+    }
+
+    .callout-tip {
+      background-color: #ecfdf5;
+      border-left: 4px solid var(--accent);
+      color: #065f46;
+    }
+
+    .callout-warning {
+      background-color: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      color: #92400e;
+    }
+
+    .callout p {
+      color: inherit;
+      margin-bottom: 0;
+      font-size: 0.925rem;
+    }
+
+    /* Tables */
+    table.settings-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    table.settings-table th, table.settings-table td {
+      padding: 0.9rem 1.25rem;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+
+    table.settings-table th {
+      background-color: #f1f5f9;
+      font-weight: 700;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    table.settings-table td {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    table.settings-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-weight: 700;
+      color: var(--primary);
+      background-color: var(--primary-light);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    code {
+      font-family: 'Fira Code', monospace;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.825rem;
+    }
+
+    ul, ol {
+      margin: 0 0 1.5rem 1.5rem;
+      color: #334155;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    footer.doc-footer {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 992px) {
+      aside.sidebar {
+        display: none;
+      }
+      main.main-content {
+        margin-left: 0;
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">L</div>
+      <div>
+        <div class="brand-title">Lina Theme</div>
+        <span class="brand-version">v1.0.0 Official</span>
+      </div>
+    </div>
+
+    <div class="doc-search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="searchInput" placeholder="Search sections & settings..." onkeyup="filterDocs()">
+    </div>
+
+    <nav class="nav-menu">
+      <div>
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-links">
+          <li><a href="#overview">Overview & Highlights</a></li>
+          <li><a href="#installation">Theme Installation (Store)</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="nav-section-title">Global Theme Settings</div>
+        <ul class="nav-links">
+          <li><a href="#settings-global">Global Border Radii</a></li>
+          <li><a href="#settings-logo">Logo & Favicon Settings</a></li>
+          <li><a href="#settings-colors">Color Schemes Engine</a></li>
+          <li><a href="#settings-typography">Typography & Font Sizes</a></li>
+          <li><a href="#settings-layout">Layout & Container Widths</a></li>
+          <li><a href="#settings-product-cards">Product Cards Customization</a></li>
+          <li><a href="#settings-cart-shipping">Free Shipping Goal & Cart</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="nav-section-title">Header & Footer</div>
+        <ul class="nav-links">
+          <li><a href="#sec-header">Header & Mega Menu</a></li>
+          <li><a href="#sec-footer">Footer & Block Widths</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="nav-section-title">Theme Sections Library</div>
+        <ul class="nav-links">
+          <li><a href="#sec-hero-sliders">Hero Sliders & Banners <span class="badge-count">3</span></a></li>
+          <li><a href="#sec-promo-banner-grid">Promotional Banner Grid</a></li>
+          <li><a href="#sec-flash-sale">Flash Sale Banner & Timer</a></li>
+          <li><a href="#sec-featured-tabs">Featured Products Tab</a></li>
+          <li><a href="#sec-faq-accordion">FAQ Accordion & Search</a></li>
+          <li><a href="#sec-video-showcase">Scroll Video & Social Videos</a></li>
+          <li><a href="#sec-about-sections">About Us Sections <span class="badge-count">4</span></a></li>
+          <li><a href="#sec-collections">Collections Carousel & List</a></li>
+          <li><a href="#sec-marquee">Sliding Marquee Bands</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="nav-section-title">Page Templates</div>
+        <ul class="nav-links">
+          <li><a href="#tpl-help">Help Center Template</a></li>
+          <li><a href="#tpl-about">About Us Page Template</a></li>
+          <li><a href="#tpl-cart">Cart Page & Cart Drawer</a></li>
+          <li><a href="#tpl-product">Product Page & Swatches</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="nav-section-title">SEO & Schema</div>
+        <ul class="nav-links">
+          <li><a href="#seo-json-ld">Google JSON-LD Rich Snippets</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="nav-section-title">Support</div>
+        <ul class="nav-links">
+          <li><a href="#support">Merchant Support</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <div class="doc-header">
+      <h1>Lina Theme Documentation & Guide</h1>
+      <p>Official merchant documentation for Lina Theme—a high-performance, modern Shopify theme custom-built for electronics, gadgets, and tech stores.</p>
+    </div>
+
+    <!-- Overview -->
+    <section id="overview" class="doc-section">
+      <h2>Theme Overview</h2>
+      <p>Lina Theme is engineered for high-speed performance, clean aesthetic appeal, and maximum conversion rates. Built with Shopify Online Store 2.0 standards, Lina provides over 45 customizable sections, dark mode capabilities, slide-out drawer cart with free shipping goals, and full Google JSON-LD schema out of the box.</p>
+
+      <div class="card-grid">
+        <div class="info-card">
+          <div class="info-card-icon">⚡</div>
+          <h4>Core Web Vitals Optimized</h4>
+          <p>Delivers lightning-fast page loading, zero layout shifts, and responsive image srcset handling.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🎨</div>
+          <h4>45+ Theme Sections</h4>
+          <p>Drag-and-drop sections designed specifically for tech hardware, gadgets, and electronics stores.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🛒</div>
+          <h4>Cart Drawer & Free Shipping Goal</h4>
+          <p>Interactive slide-out cart drawer with dynamic free shipping progress calculation and order notes.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🔍</div>
+          <h4>Google Rich Snippets</h4>
+          <p>Native JSON-LD schemas for Products, FAQs, Breadcrumbs, Organization, and Articles.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Installation -->
+    <section id="installation" class="doc-section">
+      <h2>Theme Installation (Shopify Theme Store)</h2>
+      <p>Lina Theme is distributed directly through the official Shopify Theme Store. Installing and testing Lina in your store requires no upfront payment:</p>
+      
+      <ol>
+        <li>Go to the official <strong>Shopify Theme Store</strong> and search for <strong>Lina Theme</strong>.</li>
+        <li>Click <strong>Try theme</strong> to test Lina with your actual store products and catalog.</li>
+        <li>Shopify will automatically add Lina to your <strong>Shopify Admin &gt; Online Store &gt; Themes</strong> library as an unpublished draft.</li>
+        <li>Click <strong>Customize</strong> next to Lina Theme to build your layouts, set color schemes, and configure sections.</li>
+        <li>When ready to go live, click <strong>Publish</strong> (or <strong>Buy theme</strong>) to make Lina your active online store theme.</li>
+      </ol>
+
+      <div class="callout callout-tip">
+        <p><strong>Free Unlimited Trial:</strong> You can test and customize Lina Theme with your products and content for as long as you need for free. You are only charged when you publish Lina to your live domain.</p>
+      </div>
+    </section>
+
+    <!-- GLOBAL THEME SETTINGS -->
+    <section id="settings-global" class="doc-section">
+      <h2>Global Theme Settings</h2>
+      <p>Access these settings in the Shopify Theme Editor under <strong>Theme Settings (Gear Icon) &gt; Global</strong>.</p>
+
+      <table class="settings-table">
+        <thead>
+          <tr>
+            <th>Setting Name</th>
+            <th>Control Type</th>
+            <th>Description & Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Button Border Radius</code></td>
+            <td>Range Slider (0 - 40px)</td>
+            <td>Controls global corner roundness for primary and secondary call-to-action buttons.</td>
+          </tr>
+          <tr>
+            <td><code>Image Border Radius</code></td>
+            <td>Range Slider (0 - 40px)</td>
+            <td>Sets corner rounding for banner images, gallery tiles, and product feature media.</td>
+          </tr>
+          <tr>
+            <td><code>Card Border Radius</code></td>
+            <td>Range Slider (0 - 40px)</td>
+            <td>Sets corner rounding for product cards, collection cards, and blog showcase tiles.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Logo & Favicon -->
+    <section id="settings-logo" class="doc-section">
+      <h2>Logo & Favicon Settings</h2>
+      <p>Located under <strong>Theme Settings &gt; Logo & Favicon</strong>.</p>
+
+      <table class="settings-table">
+        <thead>
+          <tr>
+            <th>Setting Name</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Desktop Logo</code></td>
+            <td>Image Picker</td>
+            <td>Primary logo displayed on desktop headers. Falls back to Shopify Admin Brand Logo if empty.</td>
+          </tr>
+          <tr>
+            <td><code>Desktop Logo Width</code></td>
+            <td>Range (30 - 350px)</td>
+            <td>Controls custom logo display width on desktop screens.</td>
+          </tr>
+          <tr>
+            <td><code>Mobile Logo</code></td>
+            <td>Image Picker</td>
+            <td>Optional dedicated logo image for mobile screens. If left blank, automatically uses Desktop Logo.</td>
+          </tr>
+          <tr>
+            <td><code>Mobile Logo Width</code></td>
+            <td>Range (20 - 250px)</td>
+            <td>Controls custom logo display width on mobile devices.</td>
+          </tr>
+          <tr>
+            <td><code>Favicon Image</code></td>
+            <td>Image Picker</td>
+            <td>Displayed in web browser tabs (automatically scaled to 32x32px).</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Color Schemes -->
+    <section id="settings-colors" class="doc-section">
+      <h2>Color Schemes & Dark Mode Engine</h2>
+      <p>Located under <strong>Theme Settings &gt; Color Schemes</strong>. Lina uses a color scheme engine allowing you to create unlimited color palettes for your store sections.</p>
+
+      <table class="settings-table">
+        <thead>
+          <tr>
+            <th>Color Token</th>
+            <th>Applied UI Elements</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Background</code></td>
+            <td>Section background color (supports solid hex colors).</td>
+          </tr>
+          <tr>
+            <td><code>Background Gradient</code></td>
+            <td>Optional background gradient for high-impact hero and banner sections.</td>
+          </tr>
+          <tr>
+            <td><code>Body Text Color</code></td>
+            <td>Primary paragraph text, specs list, and body copy.</td>
+          </tr>
+          <tr>
+            <td><code>Heading Color</code></td>
+            <td>Section titles (H1, H2, H3), card headings, and price text.</td>
+          </tr>
+          <tr>
+            <td><code>Button Background</code></td>
+            <td>Primary action buttons, badge background, and primary highlights.</td>
+          </tr>
+          <tr>
+            <td><code>Button Text Color</code></td>
+            <td>Label text inside primary buttons and CTA badges.</td>
+          </tr>
+          <tr>
+            <td><code>Border Color</code></td>
+            <td>Subtle card dividers, input field borders, and tab separators.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Typography -->
+    <section id="settings-typography" class="doc-section">
+      <h2>Typography & Font Controls</h2>
+      <p>Located under <strong>Theme Settings &gt; Typography</strong>. Customize font families, font scale, line heights, and individual heading levels (H1 to H5).</p>
+
+      <table class="settings-table">
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Options / Range</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Body Font Family</code></td>
+            <td>Shopify Font Picker</td>
+            <td>Controls primary body text font (e.g., Assistant, Inter, Roboto, System Stack).</td>
+          </tr>
+          <tr>
+            <td><code>Body Font Scale</code></td>
+            <td>80% – 130%</td>
+            <td>Global font scaling multiplier for all body text.</td>
+          </tr>
+          <tr>
+            <td><code>Body Line Height</code></td>
+            <td>1.2, 1.4, 1.5, 1.6, 1.8</td>
+            <td>Line spacing for body paragraphs.</td>
+          </tr>
+          <tr>
+            <td><code>Heading Font Family</code></td>
+            <td>Shopify Font Picker</td>
+            <td>Controls font family for all section headings and titles.</td>
+          </tr>
+          <tr>
+            <td><code>Heading Text Transform</code></td>
+            <td>None, UPPERCASE, lowercase, Capitalize</td>
+            <td>Text case transformation for headings.</td>
+          </tr>
+          <tr>
+            <td><code>Heading Letter Spacing</code></td>
+            <td>-1px to 8px</td>
+            <td>Letter spacing (kerning) for section titles.</td>
+          </tr>
+          <tr>
+            <td><code>H1, H2, H3, H4, H5 Sizes</code></td>
+            <td>Custom Pixel Sliders</td>
+            <td>Independent font size and font weight controls for H1 through H5.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Layout -->
+    <section id="settings-layout" class="doc-section">
+      <h2>Layout & Container Widths</h2>
+      <p>Located under <strong>Theme Settings &gt; Layout</strong>.</p>
+
+      <table class="settings-table">
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Options</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Maximum Content Width</code></td>
+            <td>960px, 1100px, 1200px, 1400px, 1600px</td>
+            <td>Sets the maximum container width across all store pages and sections.</td>
+          </tr>
+          <tr>
+            <td><code>Mobile Horizontal Padding</code></td>
+            <td>8px – 48px</td>
+            <td>Left and right padding for section containers on mobile devices.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Product Cards -->
+    <section id="settings-product-cards" class="doc-section">
+      <h2>Product Cards Customization</h2>
+      <p>Located under <strong>Theme Settings &gt; Product Cards</strong>. Configure product grid card appearance globally across collection pages and product sliders.</p>
+
+      <table class="settings-table">
+        <thead>
+          <tr>
+            <th>Setting Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Card Image Fit Mode</code></td>
+            <td>Switch between <strong>Cover</strong> (crops to fill container) or <strong>Contain</strong> (shows complete image without cropping).</td>
+          </tr>
+          <tr>
+            <td><code>Show Secondary Image on Hover</code></td>
+            <td>Flips to the 2nd product image when hovering over product cards.</td>
+          </tr>
+          <tr>
+            <td><code>Show Color Swatches</code></td>
+            <td>Displays interactive variant color swatches on product grid cards.</td>
+          </tr>
+          <tr>
+            <td><code>Show Vendor</code></td>
+            <td>Displays product brand or vendor name above title.</td>
+          </tr>
+          <tr>
+            <td><code>Show Badges & Position</code></td>
+            <td>Renders Sale and Sold Out badges in Top Left, Top Right, Bottom Left, or Bottom Right corner.</td>
+          </tr>
+          <tr>
+            <td><code>Add to Cart Button Options</code></td>
+            <td>Configure button size, width (30%-100%), and optional Shopping Bag or Plus icon.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- THEME SECTIONS LIBRARY -->
+    <section id="sec-hero-sliders" class="doc-section">
+      <h2>Hero Sliders & Banners</h2>
+      <p>Lina includes 3 customizable hero banner sections located in the Theme Editor section picker:</p>
+
+      <ul>
+        <li><span class="section-tag">Hero Slider</span> Full-width hero carousel with responsive background images, slide headlines, subheading text, and CTA buttons.</li>
+        <li><span class="section-tag">Hero Slider 2</span> Tech-focused hero slider with split product media cards, technical spec badges, and price pill buttons.</li>
+        <li><span class="section-tag">Hero Grid</span> Multi-tile hero grid for displaying featured product categories (e.g., Laptops, Audio, Smartwatches) side-by-side.</li>
+      </ul>
+    </section>
+
+    <section id="sec-promo-banner-grid" class="doc-section">
+      <h2>Promotional Banner Grid</h2>
+      <p><span class="section-tag">Promotional Banner Grid</span></p>
+      <p>Display promotional offers, flash sales, or new arrivals in a multi-column banner grid.</p>
+      
+      <div class="callout callout-tip">
+        <p><strong>Mobile Layout Control:</strong> Under section settings, set <strong>Columns on Mobile</strong> to choose between a 2-column stacked grid or a smooth horizontal swipe carousel on mobile screens.</p>
+      </div>
+    </section>
+
+    <section id="sec-flash-sale" class="doc-section">
+      <h2>Flash Sale Banner & Urgency Timer</h2>
+      <p><span class="section-tag">Flash Sale Banner</span></p>
+      <p>Drive urgency for limited-time promotions with an integrated JavaScript countdown timer (Days, Hours, Minutes, Seconds) and a customizable stock/discount progress bar.</p>
+    </section>
+
+    <section id="sec-featured-tabs" class="doc-section">
+      <h2>Featured Products Tab</h2>
+      <p><span class="section-tag">Featured Products Tab</span></p>
+      <p>Organize products from different collections (e.g., Best Sellers, New Arrivals, Trending Tech) into seamless tabbed navigation without page reloads.</p>
+    </section>
+
+    <section id="sec-faq-accordion" class="doc-section">
+      <h2>FAQ Accordion with Category Filter & Search</h2>
+      <p><span class="section-tag">FAQ Accordion</span></p>
+      <p>High-conversion FAQ accordion section featuring:</p>
+      <ul>
+        <li><strong>Dynamic Category Filter:</strong> Tabs automatically generated from FAQ question category labels.</li>
+        <li><strong>Real-time Search Bar:</strong> Live search input allowing customers to find instant answers.</li>
+        <li><strong>Split Side Image:</strong> Optional side support card with technician/support team media.</li>
+        <li><strong>Google FAQ Schema:</strong> Automatically outputs valid <code>FAQPage</code> JSON-LD microdata for search engine rich results.</li>
+      </ul>
+    </section>
+
+    <section id="sec-video-showcase" class="doc-section">
+      <h2>Scroll Expanding Video & Social Videos Showcase</h2>
+      <p>Showcase product media and video reviews with 2 dedicated video sections:</p>
+      <ul>
+        <li><span class="section-tag">Scroll Expanding Video</span> Video banner that smoothly expands to full screen container width as the user scrolls down the page.</li>
+        <li><span class="section-tag">Social Videos Showcase</span> Vertical video cards styled like TikTok / Instagram Reels for video testimonials and unboxing clips.</li>
+      </ul>
+    </section>
+
+    <section id="sec-about-sections" class="doc-section">
+      <h2>About Us Sections</h2>
+      <p>Build compelling brand story pages using Lina's 4 About Us sections:</p>
+      <ul>
+        <li><span class="section-tag">About Promo Split</span> Split image/text section with a dynamic SVG Icon selector so merchants can choose feature icons directly in the Theme Editor.</li>
+        <li><span class="section-tag">About Journey</span> Interactive company milestone timeline section.</li>
+        <li><span class="section-tag">About Pillars</span> Grid of core company values and customer promises.</li>
+        <li><span class="section-tag">About Partners</span> Press coverage mentions and partner brand logo marquee.</li>
+      </ul>
+    </section>
+
+    <section id="sec-collections" class="doc-section">
+      <h2>Collections Carousel & Subcollections List</h2>
+      <ul>
+        <li><span class="section-tag">Collections Carousel</span> Touch-friendly collection carousel for showcasing product categories with image cards and item count pills.</li>
+        <li><span class="section-tag">Subcollections List</span> Renders subcategories at the top of collection pages for fast navigation.</li>
+      </ul>
+    </section>
+
+    <section id="sec-marquee" class="doc-section">
+      <h2>Sliding Marquee Bands</h2>
+      <p><span class="section-tag">Sliding Marquee Bands</span></p>
+      <p>Continuous infinite marquee band displaying scrolling announcements, brand USPs, or promotional slogans.</p>
+    </section>
+
+    <!-- PAGE TEMPLATES -->
+    <section id="tpl-help" class="doc-section">
+      <h2>Help Center & Custom Templates</h2>
+      <p>Lina includes ready-to-assign JSON page templates in Shopify Admin under <strong>Online Store &gt; Pages</strong>:</p>
+
+      <table class="settings-table">
+        <thead>
+          <tr>
+            <th>Template Name</th>
+            <th>Included Sections & Functionality</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>page.help.json</code></td>
+            <td><strong>Help Center Template:</strong> Includes FAQ Accordion section, category search, and support contact CTA.</td>
+          </tr>
+          <tr>
+            <td><code>page.about.json</code></td>
+            <td><strong>About Us Template:</strong> Pre-loaded with About Journey timeline, About Pillars, and About Promo Split sections.</td>
+          </tr>
+          <tr>
+            <td><code>page.contact.json</code></td>
+            <td><strong>Custom Contact Template:</strong> Customizable contact form with custom input blocks and shop location info.</td>
+          </tr>
+          <tr>
+            <td><code>page.wishlist.json</code></td>
+            <td><strong>Wishlist Template:</strong> Dedicated customer saved products page.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Cart Drawer & Page -->
+    <section id="tpl-cart" class="doc-section">
+      <h2>Cart Drawer & Modern Cart Page</h2>
+      <p>Lina includes both a slide-out drawer cart and a modern full page cart template.</p>
+
+      <h3>Cart Features:</h3>
+      <ul>
+        <li><strong>Free Shipping Goal Bar:</strong> Configurable free shipping threshold with animated progress bar calculation.</li>
+        <li><strong>Order Notes & Gift Messages:</strong> Integrated order note text area for special delivery instructions.</li>
+        <li><strong>Sticky Cart Bar:</strong> Persistent add-to-cart bar appearing as customers scroll down product pages.</li>
+      </ul>
+    </section>
+
+    <!-- Product Page & Swatches -->
+    <section id="tpl-product" class="doc-section">
+      <h2>Product Page & Variant Swatches</h2>
+      <p>The main product section offers rich customization for hardware and gadget listings:</p>
+
+      <ul>
+        <li><strong>Color & Variant Image Swatches:</strong> Renders color swatches or variant image swatches on product options.</li>
+        <li><strong>Product Tabs:</strong> Organizes descriptions, specifications, shipping policy, and reviews into clean tabs.</li>
+        <li><strong>Sticky Add-to-Cart:</strong> Bottom bar ensuring the Buy button is always accessible on mobile and desktop.</li>
+      </ul>
+    </section>
+
+    <!-- SEO & JSON-LD -->
+    <section id="seo-json-ld" class="doc-section">
+      <h2>Built-in SEO & Google JSON-LD Schema</h2>
+      <p>Lina includes native Google Rich Snippet support in <code>snippets/json-ld.liquid</code> without requiring paid SEO apps.</p>
+
+      <table class="settings-table">
+        <thead>
+          <tr>
+            <th>Schema Type</th>
+            <th>Supported Microdata</th>
+            <th>Google SERP Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Product</code></td>
+            <td>Name, Price, Currency, SKU, Barcode/GTIN, Availability, Brand, Image, Condition</td>
+            <td>Renders price, stock status, and product star ratings in Google Search.</td>
+          </tr>
+          <tr>
+            <td><code>FAQPage</code></td>
+            <td>Questions & Answers from FAQ Accordion section</td>
+            <td>Renders expandable FAQ drop-down boxes directly on Google search results.</td>
+          </tr>
+          <tr>
+            <td><code>BreadcrumbList</code></td>
+            <td>Home &gt; Collection &gt; Product path</td>
+            <td>Displays clean URL breadcrumb navigation paths in search engine listings.</td>
+          </tr>
+          <tr>
+            <td><code>Organization & WebSite</code></td>
+            <td>Store Name, Logo URL, SearchAction target</td>
+            <td>Powers Google Knowledge Graph brand cards and Sitelinks Search Box.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Support -->
+    <section id="support" class="doc-section">
+      <h2>Merchant Support</h2>
+      <p>Need assistance with Lina Theme? Our support team is available to assist you with section configurations or theme inquiries.</p>
+
+      <div class="callout callout-info">
+        <p><strong>Developer Support:</strong> Reach out to your theme developer through the Shopify Partner Portal or theme support contact details.</p>
+      </div>
+    </section>
+
+    <footer class="doc-footer">
+      <p>&copy; 2026 Lina Theme. Built for Shopify Online Store 2.0.</p>
+    </footer>
+
+  </main>
+
+  <script>
+    function filterDocs() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toLowerCase();
+      const sections = document.querySelectorAll('.doc-section');
+
+      sections.forEach(section => {
+        const text = section.innerText.toLowerCase();
+        if (text.includes(filter)) {
+          section.style.display = '';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    }
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const sections = document.querySelectorAll('.doc-section');
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === `#${current}`) {
+          a.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
